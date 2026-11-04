@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="学习回路案例的核验摘要：测试结果、题库统计口径与证据边界。">
+<title>核验摘要 / 学习回路 — Soran 张书焓</title>
+<link rel="icon" href="../assets/img/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/style.css?v=7">
+</head>
+<body class="verify-page">
+<header class="nav wrap"><a href="../projects/learning-loop.html#evidence">← 返回案例</a><span class="mono">VERIFICATION / 2026-10-31</span></header>
+<main class="wrap">
+<span class="eyebrow">证据与边界</span>
+<h1>学习回路：一次明确范围的核验。</h1>
+<p>对象：原项目源码与题库文件的隔离副本，不包含私人学习记录。只读检查，未修改原项目。</p>
+
+<p class="audit-scope">记录日期：2026-10-31。2026-11-01 的网站审查只核对随站证据台账与展示口径，未再次运行源项目测试。</p>
+<h2>1. 测试（2026-10-31 上午）</h2>
+<pre>Desktop:   Ran 23 tests — OK
+Collector: Ran 176 tests — OK</pre>
+<p>桌面端覆盖选题、计数、守护与勿扰逻辑；采集端使用离线夹具，覆盖发现、分类、语言、恢复与资料库等逻辑。采集端首次运行因隔离副本缺少配置文件而失败；补齐原始配置和方向词表后通过，未修改配置值。测试有未关闭文件的 ResourceWarning。Go 导入工具只核查了源码与测试文件，未重跑测试。</p>
+<p>当天下午题库扩展后复查：采集端源码文件的最后修改时间均早于 2026-10-12，最后修改时间一致不能单独证明代码内容完全一致；未附内容哈希对照。</p>
+
+<h2>2. 题库统计（2026-10-31 晚，逐文件解析）</h2>
+<table>
+<tr><th>轨道</th><th>领域（文件）</th><th>题数</th><th>基础 / 拓展</th></tr>
+<tr><td>AI</td><td>大模型原理（01_llm）</td><td>12</td><td>8 / 4</td></tr>
+<tr><td>AI</td><td>提示与上下文工程（02_prompt_context）</td><td>10</td><td>6 / 4</td></tr>
+<tr><td>AI</td><td>检索增强与知识库（03_rag）</td><td>12</td><td>7 / 5</td></tr>
+<tr><td>AI</td><td>智能体与工具（04_agents）</td><td>14</td><td>9 / 5</td></tr>
+<tr><td>产品通用</td><td>需求分析与管理（11_requirements）</td><td>12</td><td>8 / 4</td></tr>
+<tr><td>产品通用</td><td>业务架构与流程（12_business_arch）</td><td>13</td><td>8 / 5</td></tr>
+<tr><td>产品通用</td><td>信息系统与技术基础（13_info_systems）</td><td>12</td><td>9 / 3</td></tr>
+<tr><td colspan="2"><b>合计</b></td><td><b>85</b></td><td><b>55 / 30</b></td></tr>
+</table>
+<p>统计只读取题号与层级字段，没有输出或保存答案内容。题号登记表与上表一致。知识地图共 91 个概念。</p>
+
+<h2>3. 审题与导入流程的证据</h2>
+<p>项目内留有《题库更新审阅报告（2026-10-31）》与《产品通用轨第一批自检报告》。审阅结论为“局部修改后导入”，列出两个最严重问题：检索增强一组的前置链断裂与几处机制讲错（如 RRF 奖励的是两路排名都靠前，原稿写反）；一道题领域归属错误、与另一题大面积重复。自检报告记录了逐题修改、脚本硬校验 0 错误、沙盒导入（22 → 85 题）后再正式导入。</p>
+<p>以上校验与沙盒导入结果来自开发记录，本次没有重跑校验脚本；本次复核的是导入后的题库文件本身。</p>
+
+<h2>4. 运行记录</h2>
+<p>采集日志覆盖 2026-10-10 至 10-31 共 22 天；采集包 21 个（10-11 至 10-31）；资料库中约 150 篇项目笔记。</p>
+
+<h2>5. 这些证据能证明什么</h2>
+<p>它们支持对应逻辑在测试场景中按预期执行、题库内容经过了审阅与结构校验。它们不能证明真实网络持续可用、所有会议软件都能正确勿扰、题目知识完全正确，或学习能力获得提升。规模是内容状态，不是学习成效。案例界面为重绘，网页演示不连接原始桌面程序。</p>
+<a class="text-link" href="../projects/learning-loop.html#evidence">返回结果与下一步 ↗</a>
+</main>
+<footer class="wrap footer"><span class="brand-small">S↗ / SIGNAL LAB</span><a href="../index.html">回到首页 ↑</a></footer>
+</body>
+</html>

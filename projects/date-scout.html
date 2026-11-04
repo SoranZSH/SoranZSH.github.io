@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101210">
+<meta name="description" content="悉尼约会助理：每 3 天自动采集悉尼活动，按固定分数线筛选并生成可执行的约会方案。真实运行三个月后，用数据复盘并重写推荐规则。">
+<title>悉尼约会助理 / Sydney Date Scout — Soran 张书焓</title>
+<link rel="icon" href="../assets/img/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/style.css?v=7">
+<script src="../assets/js/app.js?v=7" defer></script>
+</head>
+<body class="case-page">
+<a class="skip" href="#main">跳到内容</a>
+<header class="nav wrap">
+  <a class="brand" href="../index.html"><span class="brand-mark">S<span>↗</span></span><span>SORAN <span class="brand-name">张书焓</span><span class="brand-sub">SIGNAL LAB / 个人项目集</span></span></a>
+  <nav aria-label="主导航"><a href="../index.html#work">← 项目集</a><a href="#replay-section">规则回放</a><button class="command-open" aria-label="打开快速导航">导航</button></nav>
+</header>
+<main id="main">
+<section class="case-hero wrap">
+  <div class="hero-top mono"><span>CASE STUDY / 002</span><span>PERSONAL PRODUCT · 2026</span></div>
+  <div class="tags"><span>产品定义</span><span>推荐规则设计</span><span>AI 辅助开发与迭代</span></div>
+  <h1>推荐得少一点，<br><span class="accent">才更值得去。</span></h1>
+  <div class="case-lead">
+    <div><span class="mono">SYDNEY DATE SCOUT / 悉尼约会助理</span><p>每 3 天自动找悉尼的活动，<br>只推“值得为它安排一次约会”的那几个。</p></div>
+    <a class="button lime" href="#replay-section">看新规则拦下了什么 <span>↗</span></a>
+  </div>
+  <div class="case-meta">
+    <div><span>项目性质</span><strong>个人自用 · Windows 桌面工具</strong></div>
+    <div><span>我的工作</span><strong>需求与取舍 / 复盘决策 / 迭代验收</strong></div>
+    <div><span>产品组成</span><strong>活动采集 + 评分筛选 + 约会方案</strong></div>
+    <div><span>案例视角</span><strong>用三个月真实运行数据复盘</strong></div>
+  </div>
+</section>
+<div class="case-banner ds-banner"><div class="wrap banner-inner"><span class="mono">FROM NOISE TO A NIGHT OUT</span><div class="banner-flow"><span>采集<span>COLLECT</span></span><b>↗</b><span>评分<span>SCORE</span></span><b>↗</b><span>赴约<span>GO</span></span></div><p>分数线固定在 68 分：达标的少就少推，一个都没有就说“本次无推荐”。</p></div></div>
+
+<div class="case-body wrap">
+<a class="mobile-index" href="#case-index">章节目录 ↑</a>
+<aside class="case-toc" id="case-index"><span class="mono">IN THIS CASE</span><a href="#problem">01　重新定义问题</a><a href="#system">02　会说“不”的管线</a><a href="#decisions">03　关键产品取舍</a><a href="#replay-section">04　规则回放</a><a href="#iteration">05　真实迭代</a><a href="#evidence">06　结果与下一步</a><div class="toc-bottom mono">FEWER PICKS.<br>BETTER DATES.</div></aside>
+<div class="case-content">
+
+<section id="problem">
+  <span class="eyebrow">01 / THE REAL PROBLEM</span>
+  <h2>想约会时，缺的不是活动。<br>是“哪个值得去”的判断。</h2>
+  <p class="large-copy">悉尼每周有几百场活动，散落在不同网站。真正花时间的是筛选：时间合不合适、远不远、贵不贵、两个人去会不会尴尬，以及去之前该怎么安排。</p>
+  <div class="problem-list">
+    <article><span>01</span><div><h3>信息分散，而且大多拿不到</h3><p>候选的 17 个来源里，15 个没有可用的活动数据，2 个是资讯流而不是活动流——接进来 110 条，可用 0 条。</p></div></article>
+    <article><span>02</span><div><h3>“有推荐”不等于“推荐得好”</h3><p>每次都凑满一个列表，用户很快就学会忽略它。推荐数量应该由质量决定，而不是反过来。</p></div></article>
+    <article><span>03</span><div><h3>知道活动，还差一步才能约人</h3><p>几点碰头、人均多少钱、结束后去哪儿、路上聊什么——没想好这些，推荐就停在“看到了”。</p></div></article>
+  </div>
+  <blockquote>产品目标：只推“值得为它安排一次约会”的活动，并直接给出能执行的方案。宁可少推，也不凑数。</blockquote>
+  <div class="digest">
+    <div class="digest-top"><span>DIGEST · 2026-10-28 12:04</span><span>RUBRIC v1.1.0 · 第 1 / 10 条</span></div>
+    <div class="digest-item">
+      <div class="digest-title"><h3>Indigenous Studies: Bringing Knowledge Forward</h3><strong>79.6<span> /100</span></strong></div>
+      <p class="digest-meta">10-28（周三）13:15 · UTS Business School，Ultimo · 免费</p>
+      <ol class="digest-flags">
+        <li><span>01</span><div><q>推荐理由：……互动性 8.0/10（动手参与）</q><p>这是一场为期两天的学者研讨会，却被算成“动手参与”，互动性拿了 8 分。</p></div></li>
+        <li><span>02</span><div><q>22:03 续摊 —「步行范围内的小酒馆」</q><p>主活动下午一点开始，续摊却排到了晚上十点。</p></div></li>
+        <li><span>03</span><div><q>聊天话题：……成品你打算怎么用/放哪？</q><p>话题模板跟着错误的互动类型走，问起了根本不存在的“成品”。</p></div></li>
+      </ol>
+    </div>
+    <div class="digest-note">节选自当天推荐摘要原文，按网站样式重排。这一批 10 条全部“达标”。</div>
+  </div>
+  <p class="note">本项目只有我一个用户，问题框架来自个人使用和运行数据，没有做过外部用户访谈。</p>
+</section>
+
+<section id="system">
+  <span class="eyebrow">02 / THE SYSTEM</span>
+  <h2>一条管线，<br>每一步都可以说“不”。</h2>
+  <p>一个活动要连续通过核验、评分和推送三道关，任何一关不满足都会出局，并留下原因——事后能解释“为什么没推它”。</p>
+  <div class="pipeline" aria-label="推荐流程">
+    <div class="pipeline-tabs five" role="tablist" aria-label="查看流程环节">
+      <button role="tab" id="stage-tab-0" aria-controls="stage-panel" aria-selected="true" data-stage="0">01 采集</button>
+      <button role="tab" id="stage-tab-1" aria-controls="stage-panel" aria-selected="false" tabindex="-1" data-stage="1">02 核验</button>
+      <button role="tab" id="stage-tab-2" aria-controls="stage-panel" aria-selected="false" tabindex="-1" data-stage="2">03 评分</button>
+      <button role="tab" id="stage-tab-3" aria-controls="stage-panel" aria-selected="false" tabindex="-1" data-stage="3">04 方案</button>
+      <button role="tab" id="stage-tab-4" aria-controls="stage-panel" aria-selected="false" tabindex="-1" data-stage="4">05 学习</button>
+    </div>
+    <div id="stage-panel" role="tabpanel" aria-labelledby="stage-tab-0"><span class="mono" id="stage-kind">COLLECT / 采集层</span><h3 id="stage-title">只用公开、可验证的活动数据。</h3><p id="stage-copy">声明式源清单，新增一个源只加一段配置。</p><div class="contract"><span>OUTPUT</span><code id="stage-output">原始活动 + 来源证据</code></div></div>
+  </div>
+  <script type="application/json" id="stage-data">[
+{"kind":"COLLECT / 采集层","title":"只用公开、可验证的活动数据。","copy":"声明式源清单，新增一个源只加一段配置。当前唯一的真实源是悉尼市政府官方活动库：列表页粗筛，只对 21 天推荐窗口内的活动抓详情，遵守 robots.txt。","output":"原始活动 + 来源证据"},
+{"kind":"VERIFY / 核验层","title":"先排除“去不了”和“不像约会”的。","copy":"时间、地点、价格、来源必须齐全；超预算、超距离、已售罄、已过期直接剔除。新版加了约会适配闸门：儿童、青少年、老年、志愿者类活动直接出局。","output":"通过核验的活动 + 剔除原因"},
+{"kind":"SCORE / 评分层","title":"每个活动独立打分，分数线不移动。","copy":"七个维度按固定锚点打分，约会氛围、互动性权重最高。加权满分 100，达到 68 分才推荐；约会氛围、交通、性价比任一低于下限即一票否决。","output":"总分 + 逐维度评分依据"},
+{"kind":"PLAN / 方案与推送","title":"推荐要能直接拿去约人。","copy":"为每个达标活动生成时间线、人均预算、前置与续摊地点和聊天话题。同一系列最多推 3 次、每类最多 3 条；每轮只弹一个窗口。","output":"弹窗 + 桌面程序 + 一键复制方案"},
+{"kind":"LEARN / 反馈学习","title":"学习口味，但不碰分数线。","copy":"👍/👎 训练内容判别模型，只作用在筛选层；查看、点链接、复制方案累积类别偏好，只调整同一批内部的排序。截至 2026-10-31，真实反馈标签为 0；模块已实现，学习效果未验证。","output":"判别模型 + 口味画像（待真实反馈验证）"}
+]</script>
+  <div class="boundary"><span>固定的含义</span><strong>68 分：产品设定的推荐门槛</strong><p>在相同评分版本与输入下，同一个活动不因批次中其他候选的强弱而改变得分。一条测试专门把同一活动放进“强批次”和“弱批次”，断言两次得分相等。</p></div>
+</section>
+
+<section id="decisions">
+  <span class="eyebrow">03 / PRODUCT JUDGEMENT</span>
+  <h2>含金量，<br>藏在没有降低的那条线里。</h2>
+  <div class="ownership">
+    <span class="mono">MY ROLE / 决策与协作的分工</span>
+    <h3>我判断“对不对”，AI 负责“怎么做”。</h3>
+    <p>用了三个月后，我判断它“看起来完成了，但并不实用”，于是发起复盘并定下改造边界：每一步都能用 Git 回退；为开源做准备；在规则之外加两条学习轨道——先用我的反馈训练内容判别模型，固化后作为新用户的冷启动模型，再让每个用户的行为慢慢形成各自的推荐。</p>
+    <p>AI 承担复盘分析、代码实现与测试。本案例呈现需求、判断与协作过程，不宣称代码由我手写。</p>
+    <details>
+      <summary>查看一条判断如何落到实现</summary>
+      <p><b>开发记录中的配色方向：</b>减少恋爱 App 的既视感，以传统色表达浪漫。具体意见归属仍待确认。<br><b>落地：</b>改用中国传统色“胭脂 / 黛”，桃花只作点缀，不铺大面积底色。<br><b>为什么改得快：</b>上一版已把全部颜色集中到一个设计令牌文件，换整套配色只动一个文件。<br><b>依据：</b>项目 README v1.4.0–v1.4.2、scout/theme.py。</p>
+    </details>
+  </div>
+  <div class="decision"><span class="mono">DECISION 01</span><h3>宁可空着，也不凑数。</h3><p>评分只看活动自身，不看同期有多少竞品、平均分多少。代价是有些批次推荐很少，甚至“本次无推荐”；换来的是同一评分版本内稳定的门槛；达到门槛是否真的值得去，仍须反馈验证。</p><div class="decision-foot"><span>保留：分数线的含义</span><span>代价：推荐量不稳定</span></div></div>
+  <div class="decision"><span class="mono">DECISION 02</span><h3>测不出来的维度，不让它拖住整张表。</h3><p>接入真实数据后，“讨论热度”恒为 2 分（只有一个来源），“新鲜感”最高 4 分（官方数据不标注“首届”）。30% 的权重被锁死，最高分只有 60.8，68 分线永远不会触发。选择把权重移到能真实测量的维度，而不是降低分数线。</p><div class="decision-foot"><span>保留：68 分的含义</span><span>代价：评分表升版本，跨版本不可比</span></div></div>
+  <div class="decision"><span class="mono">DECISION 03</span><h3>补上七个维度之外的问题：这像约会吗？</h3><p>免费 + 动手 + 周末 + 市区，恰好是旧评分表的满分模板，于是社区课程、图书馆讲座、儿童活动占满了推荐。新版不动权重和分数线，而是加约会适配闸门、社区场地打八折、同一系列最多推 3 次。</p><div class="decision-foot"><span>保留：权重与阈值不变</span><span>代价：推送量明显变少</span></div></div>
+  <div class="decision"><span class="mono">DECISION 04</span><h3>学习可以慢，但不能越权。</h3><p>两条学习轨道都被关在评分之外：判别模型只决定要不要剔除明显不合适的，口味画像只调整同一批内部的排序，并用平滑让变化刻意放慢。个性化出了偏差，也不会破坏分数的可比性。</p><div class="decision-foot"><span>保留：可解释、可比</span><span>代价：见效慢，依赖持续标注</span></div></div>
+</section>
+
+<section id="replay-section">
+  <span class="eyebrow">04 / REPLAY THE RULES</span>
+  <h2>同一批推荐，<br>换一套规则再看一次。</h2>
+  <p>这是 2026-10-28 真实推送的第 22 批，共 10 条。切换到新规则，看哪些会被拦下、为什么。</p>
+  <div class="replay" id="replay">
+    <div class="replay-top"><span><i class="dot"></i> 规则回放 / 真实批次数据</span><div class="replay-tabs" role="group" aria-label="选择评分规则"><button data-rule="v11" aria-pressed="true">旧规则 v1.1</button><button data-rule="v12" aria-pressed="false">新规则 v1.2</button></div></div>
+    <p class="replay-summary" role="status"></p>
+    <ul class="replay-list"></ul>
+    <div class="replay-note">按推送记录里保存的逐维度分数复算；新规则没有改权重，只加了闸门与场地系数。</div>
+  </div>
+  <script type="application/json" id="replay-data">{
+ "batch": 22,
+ "date": "2026-10-28",
+ "counts": {
+  "gate": 2,
+  "venue": 4
+ },
+ "items": [
+  {
+   "title": "Indigenous Studies: Bringing Knowledge Forward",
+   "venue": "UTS Business School",
+   "cat": "experience",
+   "old": 79.6,
+   "new": 79.6,
+   "status": "pass",
+   "reason": "仍未解决：学术研讨会被误判为动手体验，现有规则未拦截"
+  },
+  {
+   "title": "Lorrie Graham in conversation",
+   "venue": "State Library of NSW",
+   "cat": "experience",
+   "old": 77.2,
+   "new": 61.8,
+   "status": "venue",
+   "reason": "场地为图书馆 ×0.8：77.2 → 61.8，低于 68"
+  },
+  {
+   "title": "Community Chats: Haymarket and Ultimo",
+   "venue": "Darling Square Library",
+   "cat": "experience",
+   "old": 72.0,
+   "new": 57.6,
+   "status": "venue",
+   "reason": "场地为图书馆 ×0.8：72.0 → 57.6，低于 68"
+  },
+  {
+   "title": "Newtown Art Club",
+   "venue": "",
+   "cat": "experience",
+   "old": 71.6,
+   "new": 71.6,
+   "status": "pass",
+   "reason": "场地字段为空，降权没有生效"
+  },
+  {
+   "title": "Creative writing class",
+   "venue": "Cliff Noble Community Centre",
+   "cat": "experience",
+   "old": 71.4,
+   "new": 57.1,
+   "status": "venue",
+   "reason": "场地为社区中心 ×0.8：71.4 → 57.1，低于 68"
+  },
+  {
+   "title": "Singing class for beginners",
+   "venue": "Pyrmont Community Centre",
+   "cat": "experience",
+   "old": 71.4,
+   "new": 57.1,
+   "status": "venue",
+   "reason": "场地为社区中心 ×0.8：71.4 → 57.1，低于 68"
+  },
+  {
+   "title": "Halloween at Hay St",
+   "venue": "",
+   "cat": "food",
+   "old": 70.8,
+   "new": 70.8,
+   "status": "gate",
+   "reason": "命中“kids”：儿童向活动"
+  },
+  {
+   "title": "Sub-Urban at The Substation",
+   "venue": "Qtopia Sydney",
+   "cat": "experience",
+   "old": 70.8,
+   "new": 70.8,
+   "status": "pass",
+   "reason": ""
+  },
+  {
+   "title": "The mad botanist: family adventure",
+   "venue": "The Royal Botanic Garden",
+   "cat": "experience",
+   "old": 70.6,
+   "new": 70.6,
+   "status": "gate",
+   "reason": "命中“family”：家庭活动"
+  },
+  {
+   "title": "Future World Expo",
+   "venue": "Sydney",
+   "cat": "experience",
+   "old": 70.6,
+   "new": 70.6,
+   "status": "pass",
+   "reason": ""
+  }
+ ]
+}</script>
+  <p class="note">规则拦不住它说不清的模式：Newtown Art Club 场地字段为空，降权没生效；学术研讨会也照样通过——这正是要加判别模型的原因。对全部 201 条历史推送复算：闸门剔除 9%，社区场地降权后落线 26%，系列上限再拦 5%。</p>
+</section>
+
+<section id="iteration">
+  <span class="eyebrow">05 / ITERATION, NOT A STRAIGHT LINE</span>
+  <h2>真实数据，<br>一次次推翻了我的假设。</h2>
+  <div class="timeline">
+    <article><span class="mono">PROTOTYPE / 2026.07</span><h3>先跑通全链路</h3><p>评分表、方案生成、弹窗与桌面程序。权重用手写样例校准——后来证明，样例里有真实世界拿不到的信号。</p></article>
+    <article><span class="mono">REALITY / 2026.08</span><h3>接上真实数据，大部分假设不成立</h3><p>17 个来源只剩 1 个能用，两个维度失去区分度，于是重配权重。另一个坑：只抓 60 条详情时 0 条过线，覆盖完整窗口后有 9 条——不是标准太严，是取样太小。</p></article>
+    <article><span class="mono">RUN / 2026.08 – 10</span><h3>三个月的运行记录，暴露两个静默失败</h3><p>弹窗不关会阻塞“记录本次运行”，让间隔守卫失效；中文路径让启动脚本在不同代码页下被解错，连日志都没有。两处都改成了不依赖用户操作和系统环境的写法。</p></article>
+    <article><span class="mono">RETHINK / 2026.10</span><h3>“看起来完成了，但并不实用”</h3><p>复盘发现推荐被社区课程和儿童活动占据。加上约会适配闸门，搭好两条学习轨道，再把界面从“能用”改到“愿意用”：卡片列表、评分条形图、一键复制约会方案。</p></article>
+  </div>
+  <div class="insight"><span class="mono">WHAT CHANGED MY THINKING</span><p>推荐系统最危险的不是推错一条，<br>而是悄悄把“有东西可推”当成了目标。</p></div>
+</section>
+
+<section id="evidence">
+  <span class="eyebrow">06 / WHAT EXISTS TODAY</span>
+  <h2>规则已经变了。<br>效果还要用真实约会来证明。</h2>
+  <div class="metrics"><div><strong>22<span> / </span>201</strong><span>真实批次 / 推送条数</span></div><div><strong>2,799</strong><span>累计入库活动（去重后）</span></div><div><strong>23</strong><span>自动化测试，隔离副本复跑通过</span></div></div>
+  <p class="note">截至 2026-10-31。推送数量只说明存在这些批次的运行记录，不说明推荐质量；三个月里没有记录“推荐之后真的去了”的数据。</p>
+  <div class="evidence-columns">
+    <article><h3><i class="dot"></i> 已有实现</h3><ul><li>官方活动库专用采集器</li><li>核验、约会适配闸门与一票否决</li><li>固定锚点评分与跨批次可比性测试</li><li>约会方案生成、单窗口弹窗与桌面程序</li><li>两条学习轨道与可撤销反馈</li></ul></article>
+    <article><h3><span class="hollow-dot"></span> 仍待验证</h3><ul><li>新规则下的推荐是否真的更想去</li><li>判别模型：演练约 40 条标签，交叉验证约 62%，尚未固化</li><li>交通耗时目前是直线距离估算</li><li>只有一个来源时，讨论热度恒为 2 分</li></ul></article>
+  </div>
+  <details class="evidence-detail"><summary>展开实现与核验说明 <span>+</span></summary>
+    <p>2026-10-31 在隔离副本中运行项目自带测试：评分 4 项、约会适配与判别模型 11 项、学习轨道 8 项，共 23 项通过。<a class="text-link" href="../verification/date-scout.html">查看核验摘要与证据边界 ↗</a></p>
+    <p>批次、推送和活动数量来自本地数据库只读查询；规则回放用推送记录中的逐维度分数按新规则复算。开发记录中的完整回放为 55%，其中“系列冷却期”部分本次未复算。</p>
+    <p>核验时数据库里还没有真实反馈标签，学习轨道尚未进入真实使用。首页封面为按产品配色重绘的示意。</p>
+  </details>
+  <h3 class="next-title">下一步，先让学习轨道吃到真实反馈。</h3>
+  <div class="next-steps">
+    <div><span class="mono">01 / 反馈</span><p>每次推送都标注 👍/👎，攒到 100 条以上再固化判别模型。</p></div>
+    <div><span class="mono">02 / 数据</span><p>接入第二个带真实日期的活动源，让“讨论热度”重新有区分度。</p></div>
+    <div><span class="mono">03 / 开源</span><p>确认个人配置不进仓库，补齐安装说明，再发布给其他用户。</p></div>
+  </div>
+</section>
+
+<section class="closing">
+  <span class="mono">TAKEAWAY</span>
+  <h2>守住一条线，<br>比凑满一个列表难。</h2>
+  <p>先定义“好”是什么，再让系统只做能证明的事。</p>
+  <a class="button lime" href="../index.html#work">返回项目集 <span>↖</span></a>
+</section>
+</div>
+</div>
+</main>
+<footer class="wrap footer"><span class="brand-small">S↗ / SIGNAL LAB</span><span class="mono">CASE 002 · SYDNEY DATE SCOUT</span><a href="#main">回到顶部 ↑</a></footer>
+<dialog id="command-dialog"><div class="command-head"><span class="mono">项目导航</span><button data-close aria-label="关闭快速导航">ESC ×</button></div><nav aria-label="快速导航"><a href="../projects/learning-loop.html">01　学习回路<span>↗</span></a><a href="../projects/date-scout.html">02　悉尼约会助理<span>↗</span></a><a href="../projects/armillary.html">03　浑天图谱<span>↗</span></a><a href="../projects/big-water-mom.html">04　大水理论最严厉的母亲<span>↗</span></a><a href="../index.html#about">05　关于 Soran<span>↗</span></a></nav></dialog>
+</body>
+</html>
