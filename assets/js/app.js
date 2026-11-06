@@ -185,7 +185,7 @@
       const link = document.createElement('a');
       link.className = 'button outline';
       link.href = url;
-      link.textContent = '访问独立网站 ↗';
+      link.textContent = '访问独立网站 ↗︎';
       link.target = '_blank';
       link.rel = 'noopener';
       button.replaceWith(link);
