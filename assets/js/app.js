@@ -145,7 +145,7 @@
       list.innerHTML = data.items.map(it => {
         const ok = v2 ? it.status === 'pass' : true;
         if (ok) shown++;
-        const score = v2 && it.status === 'venue' ? `<s>${it.old.toFixed(1)}</s> ${it.new.toFixed(1)}` : it.old.toFixed(1);
+        const score = !v2 ? it.old.toFixed(1) : it.status === 'gate' ? `<s title="历史分">${it.old.toFixed(1)}</s><span class="gate-score">不进入评分</span>` : it.status === 'venue' ? `<s>${it.old.toFixed(1)}</s> ${it.new.toFixed(1)}` : it.old.toFixed(1);
         const badge = v2 ? `<span class="rp-badge rp-${it.status}">${label[it.status]}</span>` : '<span class="rp-badge rp-pass">推荐</span>';
         const why = v2 && it.reason ? `<span class="rp-why">${it.reason}</span>` : '';
         return `<li class="${ok ? (v2 && it.reason ? 'rp-unresolved' : '') : 'rp-out'}"><div class="rp-main"><strong>${it.title}</strong><span>${it.venue || '场地字段为空'} · ${it.cat}</span>${why}</div><div class="rp-score">${score}</div>${badge}</li>`;
@@ -168,10 +168,11 @@
   function initToc(root) {
     const links = $$(root, '.case-toc a');
     if (!links.length || !('IntersectionObserver' in window)) return;
+    const anchorId = a => decodeURIComponent(a.hash.includes('~') ? a.hash.split('~').pop() : a.hash.slice(1));
     const io = new IntersectionObserver(entries => {
-      for (const en of entries) if (en.isIntersecting) links.forEach(a => a.classList.toggle('current', a.hash === '#' + en.target.id));
+      for (const en of entries) if (en.isIntersecting) links.forEach(a => a.classList.toggle('current', anchorId(a) === en.target.id));
     }, { rootMargin: '-10% 0px -55% 0px' });
-    links.forEach(a => { const s = root.querySelector(a.hash); if (s) io.observe(s); });
+    links.forEach(a => { const s = root.querySelector('#' + CSS.escape(anchorId(a))); if (s) io.observe(s); });
     onCleanup(root, () => io.disconnect());
   }
 
@@ -218,8 +219,9 @@
   }
 
   function dayMarkup(item, blocked) {
-    if (blocked) return `<p class="event-type">这次继续等</p><h3>${escapeText(item.time)} · 场景 ${escapeText(item.scene)}</h3><p class="event-reason">${escapeText(item.reason)}</p><p>这是模拟日志保留的一条候选提醒暂缓记录。</p>`;
-    return `<p class="event-type">场景 ${escapeText(item.scene)} / ${escapeText(item.state)}</p><h3>${escapeText(item.time)} · ${escapeText(item.scene_name)}</h3><blockquote class="mom-line">${escapeText(item.line)}</blockquote><dl class="ledger-values"><div><dt>饮水账</dt><dd>${item.water}<small> 有效分钟</small></dd></div><div><dt>久坐账</dt><dd>${item.sitting}<small> 有效分钟</small></dd></div></dl><p class="event-reason">出现依据 · ${escapeText(item.basis)}</p><p class="event-outcome">模拟中的后续记录 · ${escapeText(item.outcome)}${item.outcome_how ? '（'+escapeText(item.outcome_how)+'）' : ''}</p>`;
+    const sequence = item.sequence_note ? `<p class="sequence-note">${escapeText(item.sequence_note)}</p>` : '';
+    if (blocked) return `<p class="event-type">这次继续等</p><h3>${escapeText(item.time_exact || item.time)} · 场景 ${escapeText(item.scene)}</h3><p class="event-reason">${escapeText(item.reason)}</p><p>模拟日志记录了这次等待的原因。</p>${sequence}`;
+    return `<p class="event-type">场景 ${escapeText(item.scene)} / ${escapeText(item.state)}</p><h3>${escapeText(item.time_exact || item.time)} · ${escapeText(item.scene_name)}</h3><blockquote class="mom-line">${escapeText(item.line)}</blockquote><dl class="ledger-values"><div><dt>饮水账</dt><dd>${item.water}<small> 有效分钟</small></dd></div><div><dt>久坐账</dt><dd>${item.sitting}<small> 有效分钟</small></dd></div></dl><p class="event-reason">出现依据 · ${escapeText(item.basis)}</p><p class="event-outcome">模拟中的后续记录 · ${escapeText(item.outcome)}${item.outcome_how ? '（'+escapeText(item.outcome_how)+'）' : ''}</p>${sequence}`;
   }
   function initDay(root, print) {
     const box = $(root, '#day-demo');
@@ -245,7 +247,7 @@
         const button = document.createElement('button');
         button.type = 'button';
         button.textContent = item.time;
-        button.setAttribute('aria-label', `${item.time} ${blocked ? item.reason : item.scene_name}`);
+        button.setAttribute('aria-label', `${item.time_exact || item.time} ${blocked ? item.reason : item.scene_name}`);
         button.addEventListener('click', () => select(i));
         button.addEventListener('keydown', event => {
           let target = i;
