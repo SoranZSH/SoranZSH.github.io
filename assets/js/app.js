@@ -178,7 +178,7 @@
 
   // Set this URL after the independent Armillary website is published.
   // Empty values preserve the disabled grey button in every entry point.
-  const projectURLs = { armillary: '' };
+  const projectURLs = { armillary: 'https://soranzsh.github.io/armillary/' };
   function initProjectLinks(root) {
     $$(root, '[data-project-link]').forEach(button => {
       const url = projectURLs[button.dataset.projectLink];
