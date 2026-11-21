@@ -1,0 +1,6 @@
+Speech model: SenseVoice-Small (FunAudioLLM / Alibaba), ONNX export by the sherpa-onnx project.
+Source: https://huggingface.co/csukuangfj/sherpa-onnx-sense-voice-zh-en-ja-ko-yue-2024-07-17
+License: see https://github.com/modelscope/FunASR?tab=readme-ov-file#license (FunASR Model Open Source License).
+The model file is split into model.int8.onnx.part* only because of hosting file-size limits; contents are unmodified.
+
+Runtime: sherpa-onnx WebAssembly build (https://github.com/k2-fsa/sherpa-onnx), Apache-2.0.

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>金榜 Offer</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <h1><i></i>金榜 <span>Offer</span><em class="beta">内测</em></h1>
+  <ol class="steps" id="steps" aria-label="进度">
+    <li data-step="1" class="on"><b>1</b><span>说</span></li><li data-step="2"><b>2</b><span>核对</span></li><li data-step="3"><b>3</b><span>看结果</span></li>
+  </ol>
+</div></header>
+
+<!-- 第一步：说 -->
+<section class="stage hero" id="stage1" aria-labelledby="h1t">
+  <div class="wrap">
+    <h2 id="h1t">说一分钟，看看你的校招去向</h2>
+    <p class="lead">像面试开场那样介绍自己。说完自动整理成表，再告诉你最适合去哪座城市、哪类公司、做什么岗位。</p>
+    <div class="modes" role="tablist" aria-label="输入方式">
+      <button type="button" role="tab" id="mode-voice" aria-selected="true">语音输入</button><button type="button" role="tab" id="mode-text" aria-selected="false">文字输入</button>
+    </div>
+
+    <div id="voice-pane">
+      <button class="mic" id="mic" type="button" disabled aria-label="开始说话">
+        <svg class="prog" viewBox="0 0 168 168" aria-hidden="true"><circle class="ring" id="ring" cx="84" cy="84" r="78"/></svg>
+        <svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><rect x="22" y="6" width="20" height="34" rx="10" fill="#fff"/><path d="M13 30a19 19 0 0 0 38 0" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/><path d="M32 49v9M22 58h20" stroke="#fff" stroke-width="5" stroke-linecap="round"/></svg>
+      </button>
+      <p class="mic-s" id="mic-s">正在准备</p>
+      <p class="mic-hint" id="mic-hint" aria-live="polite">正在读取本地语音模型……</p>
+      <div class="bar" id="loadbar" aria-hidden="true"><i id="loadbar-i"></i></div>
+      <div class="live" id="live" aria-live="polite"></div>
+    </div>
+
+    <div id="text-pane" hidden>
+      <label class="sr" for="intro">自我介绍文字</label>
+      <textarea id="intro" placeholder="把写好的自我介绍整段粘贴到这里：学校和学历、专业和成绩、实习经历、想去的城市、想过的生活。"></textarea>
+      <div class="row"><button class="btn primary" id="parse" type="button">开始分析</button></div>
+    </div>
+
+    <ul class="cues" aria-label="可以说这些">
+      <li>哪所学校、什么学历</li><li>什么专业、成绩怎么样</li><li>在哪实习过、做了什么</li><li>想去哪座城市</li><li>想过什么样的生活</li>
+    </ul>
+    <div class="row"><button class="link" id="use-example" type="button">先用一段示例看看效果</button><span class="status" id="pstatus" aria-live="polite"></span></div>
+  </div>
+  <svg class="hills" viewBox="0 0 1200 150" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <polygon fill="#c4e6da" points="0,150 0,96 110,34 220,92 330,22 470,104 560,60 700,116 820,30 960,100 1080,44 1200,92 1200,150"/>
+    <polygon fill="#b0dccd" points="110,34 220,92 150,104"/><polygon fill="#b0dccd" points="330,22 470,104 372,104"/><polygon fill="#b0dccd" points="820,30 960,100 856,104"/><polygon fill="#b0dccd" points="1080,44 1200,92 1112,100"/><polygon fill="#b0dccd" points="560,60 700,116 596,112"/>
+    <polygon fill="#8fd0b8" points="0,150 0,112 180,78 360,112 560,84 760,118 940,86 1200,112 1200,150"/>
+    <polygon fill="#7cc5aa" points="180,78 360,112 230,112"/><polygon fill="#7cc5aa" points="560,84 760,118 620,116"/><polygon fill="#7cc5aa" points="940,86 1200,112 1010,112"/>
+    <g fill="#27835c"><polygon points="96,118 110,82 124,118"/><polygon points="126,120 137,92 148,120"/><polygon points="420,122 436,80 452,122"/><polygon points="690,124 703,94 716,124"/><polygon points="716,126 732,86 748,126"/><polygon points="1040,120 1054,84 1068,120"/><polygon points="1072,122 1082,96 1092,122"/></g>
+    <polygon fill="#33a474" points="0,150 0,128 260,110 520,134 800,112 1200,134 1200,150"/>
+    <polygon fill="#2b9367" points="260,110 520,134 330,134"/><polygon fill="#2b9367" points="800,112 1200,134 900,134"/>
+  </svg>
+</section>
+
+<!-- 第二步：核对 -->
+<section class="stage" id="stage2" hidden aria-labelledby="h2t"><div class="wrap">
+    <h2 id="h2t">我听到的是这些，不对的直接改</h2>
+    <p class="legend"><span><span class="tag heard">已识别</span>从自我介绍里听到的</span><span><span class="tag guess">待确认</span>没听到，先按默认值算</span></p>
+    <div class="fields" id="fields">
+      <div class="f" data-key="degree"><span class="lab" id="lab-degree">最高学历</span>
+        <div class="seg" role="radiogroup" aria-labelledby="lab-degree">
+          <label><input type="radio" name="degree" id="degree-ba" value="ba">本科</label><label><input type="radio" name="degree" id="degree-ma" value="ma">硕士</label><label><input type="radio" name="degree" id="degree-phd" value="phd">博士</label></div></div>
+      <div class="f" data-key="first"><label for="firstName">第一学历院校</label>
+        <div class="pair"><input type="text" id="firstName" list="school-list" placeholder="学校名（选填）" autocomplete="off"><select id="first" aria-label="第一学历院校档位"></select></div></div>
+      <div class="f" data-key="top" id="f-top"><label for="topName">最高学历院校</label>
+        <div class="pair"><input type="text" id="topName" list="school-list" placeholder="学校名（选填）" autocomplete="off"><select id="top" aria-label="最高学历院校档位"></select></div></div>
+      <div class="f" data-key="major"><label for="major">专业大类（按最高学历）</label><select id="major"></select></div>
+      <div class="f" data-key="gpa"><label for="gpa">GPA / 均分</label>
+        <div class="pair"><input type="number" id="gpa" step="0.01" min="0" inputmode="decimal"><select id="scale" aria-label="满分"><option value="4">满分 4.0</option><option value="5">满分 5.0</option><option value="100">百分制</option></select></div></div>
+      <div class="f" data-key="big"><span class="lab" id="lab-big">大厂实习段数</span>
+        <div class="seg" role="radiogroup" aria-labelledby="lab-big"><label><input type="radio" name="big" id="big-0" value="0">0</label><label><input type="radio" name="big" id="big-1" value="1">1</label><label><input type="radio" name="big" id="big-2" value="2">2</label><label><input type="radio" name="big" id="big-3" value="3">3+</label></div></div>
+      <div class="f" data-key="small"><span class="lab" id="lab-small">小厂实习段数</span>
+        <div class="seg" role="radiogroup" aria-labelledby="lab-small"><label><input type="radio" name="small" id="small-0" value="0">0</label><label><input type="radio" name="small" id="small-1" value="1">1</label><label><input type="radio" name="small" id="small-2" value="2">2</label><label><input type="radio" name="small" id="small-3" value="3">3+</label></div></div>
+      <div class="f" data-key="eng"><label for="eng">英语</label><select id="eng"><option value="0">四级或以下</option><option value="1">六级 / 雅思 6–6.5</option><option value="2">雅思 7+ / 托福 100+</option></select></div>
+      <div class="f" data-key="award"><label for="award">奖项 / 项目</label><select id="award"><option value="0">暂无</option><option value="1">校级奖学金或竞赛</option><option value="2">国奖 / 论文 / 国家级奖项</option></select></div>
+    </div>
+
+    <div class="optional"><h3>选填：钱以外的事 <small>填得越多，城市和公司类型的取舍越贴近你</small></h3>
+    <div class="fields opt">
+      <div class="f" data-key="home"><label for="home">家乡在哪个省</label><select id="home"><option value="">不想说</option></select></div>
+      <div class="f" data-key="intent"><label for="intent">心里有想做的岗位吗</label><select id="intent"><option value="">没有，帮我推荐</option></select></div>
+      <div class="f wide" data-key="aspire"><span class="lab" id="lab-aspire">五年后最想成为</span><div class="chips" id="aspire" role="radiogroup" aria-labelledby="lab-aspire"></div></div>
+      <div class="f wide" data-key="values"><span class="lab" id="lab-values">最看重的事（最多选三项）</span><div class="chips" id="values" role="group" aria-labelledby="lab-values"></div></div>
+      <div class="f" data-key="otTol"><span class="lab" id="lab-ot">对加班的态度</span><div class="chips" id="otTol" role="radiogroup" aria-labelledby="lab-ot"></div></div>
+      <div class="f" data-key="plans"><span class="lab" id="lab-plans">以后可能会</span><div class="chips" id="plans" role="group" aria-labelledby="lab-plans">
+        <label class="chip"><input type="checkbox" id="abroad">出国或读博</label><label class="chip"><input type="checkbox" id="gov">考公考编</label></div></div>
+      <div class="f wide" data-key="prefCities"><span class="lab" id="lab-pc">有特别想去的城市吗（对象、家人、喜欢都算）</span><div class="chips" id="prefCities" role="group" aria-labelledby="lab-pc"></div></div>
+      <div class="f wide" data-key="ideal"><label for="ideal">用一句话说说你的人生理想</label><input type="text" id="ideal" placeholder="例如：想在一座有烟火气的城市安家，工作稳定，周末能陪父母"></div>
+    </div>
+    </div>
+    <div class="row end"><button class="btn primary" id="reveal" type="button">放榜，看结果</button></div>
+</div></section>
+
+<!-- 第三步：结果 -->
+<section class="stage alt" id="stage3" hidden aria-labelledby="h3t"><div class="wrap">
+    <h2 id="h3t" class="sr">放榜结果</h2>
+    <div class="comic" id="comic"></div>
+    <p class="verdict" id="verdict"></p>
+
+    <div class="cols">
+      <div class="card c-purple"><h3>为什么是这里</h3><div id="why"></div></div>
+      <div class="card c-blue"><h3>三条路线，各有代价</h3><div class="routes" id="routes"></div></div>
+    </div>
+    <div class="cols">
+      <div class="card c-yellow"><h3>大厂、外企、国企还是成长型公司</h3><div id="employers"></div></div>
+      <div class="card c-green"><h3>竞争力拆解</h3><div class="bars" id="bars"></div><p class="tierline" id="tierline"></p><h4>怎么再往上走</h4><ul class="advice" id="advice"></ul></div>
+    </div>
+    <div class="card c-blue"><h3>十三个去向对比 <small>点一行切换漫画和上面的分析</small></h3>
+      <div class="table"><div class="lhead"><span></span><span>去向</span><span>公司类型 · 岗位</span><span>月薪</span><span>月加班</span><span>月结余</span><span>压力</span><span>匹配度</span></div><div id="rows"></div></div>
+      <p class="note">口径：各岗位基准薪资、城市房租与加班系数、雇主类型的倍数和评分权重都是人工设定的估算参数（见 web/js/data.js，可直接改），还没有用真实 offer 样本训练过，结果只适合当粗略参考。校准锚点见 README。评分模拟的是市场上常见的筛选习惯，不代表对个人能力的评价。</p>
+    </div>
+    <div class="row end"><button class="btn" id="again" type="button">重新说一遍</button><button class="btn" id="edit" type="button">回去改信息</button></div>
+</div></section>
+<footer>金榜 Offer 内测版 · 语音在你的浏览器里识别，不上传，页面不收集任何信息 · 数字均为估算，仅供参考</footer>
+<datalist id="school-list"></datalist>
+
+<script src="js/data.js"></script>
+<script src="js/schools.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/parser.js"></script>
+<script src="js/pitch.js"></script>
+<script src="js/asr.js"></script>
+<script src="js/comic.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
