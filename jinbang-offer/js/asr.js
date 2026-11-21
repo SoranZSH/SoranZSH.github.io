@@ -14,20 +14,32 @@
   let recognizer = null, loading = null;
   const status = (phase, progress, message) => { try { ASR.onStatus && ASR.onStatus({ phase, progress, message }); } catch (e) {} };
 
-  async function fetchBytes(url, onProgress) {
+  /* 下载二进制文件并报告进度。expected：已知的真实字节数。
+   * 注意：GitHub Pages 这类托管会用 gzip 传输，此时响应头里的 content-length 是压缩后的大小，不能当真实大小用 */
+  async function fetchBytes(url, onProgress, expected) {
     const res = await fetch(url);
     if (!res.ok) throw new Error(`读取 ${url} 失败（HTTP ${res.status}）`);
-    const total = +res.headers.get('content-length') || 0;
-    if (!res.body || !total) return new Uint8Array(await res.arrayBuffer());
-    const out = new Uint8Array(total); let got = 0; const reader = res.body.getReader();
-    for (;;) { const { done, value } = await reader.read(); if (done) break; out.set(value, got); got += value.length; onProgress && onProgress(got / total); }
-    return out;
+    const total = expected || (res.headers.get('content-encoding') ? 0 : (+res.headers.get('content-length') || 0));
+    if (!res.body) return new Uint8Array(await res.arrayBuffer());
+    const reader = res.body.getReader(); let got = 0;
+    if (total) {
+      const out = new Uint8Array(total);
+      for (;;) { const { done, value } = await reader.read(); if (done) break;
+        if (got + value.length > total) throw new Error('文件大小和预期不一致：' + url);
+        out.set(value, got); got += value.length; onProgress && onProgress(got / total); }
+      if (got !== total) throw new Error('文件没有下载完整：' + url);
+      return out;
+    }
+    const chunks = [];
+    for (;;) { const { done, value } = await reader.read(); if (done) break; chunks.push(value); got += value.length; }
+    const out = new Uint8Array(got); let o = 0; for (const c of chunks) { out.set(c, o); o += c.length; }
+    onProgress && onProgress(1); return out;
   }
   /* 线上版：模型切成几块（GitHub 单文件不能超过 100 MB），下载后放进浏览器的缓存，下次打开不用再下 */
-  async function cachedBytes(url, onProgress) {
+  async function cachedBytes(url, onProgress, expected) {
     let cache = null; try { cache = window.caches ? await caches.open('jb-asr-v1') : null; } catch (e) {}
-    if (cache) { try { const hit = await cache.match(url); if (hit) { const b = new Uint8Array(await hit.arrayBuffer()); onProgress && onProgress(1); return b; } } catch (e) {} }
-    const bytes = await fetchBytes(url, onProgress);
+    if (cache) { try { const hit = await cache.match(url); if (hit) { const b = new Uint8Array(await hit.arrayBuffer()); if (!expected || b.length === expected) { onProgress && onProgress(1); return b; } } } catch (e) {} }
+    const bytes = await fetchBytes(url, onProgress, expected);
     if (cache) { try { await cache.put(url, new Response(bytes.slice(0), { headers: { 'Content-Type': 'application/octet-stream' } })); } catch (e) {} }
     return bytes;
   }
@@ -35,7 +47,7 @@
     let man = null; try { const r = await fetch(base + 'model.manifest.json', { cache: 'no-cache' }); if (r.ok) man = await r.json(); } catch (e) {}
     if (!man || !man.parts) return fetchBytes(base + 'model.int8.onnx', p => status('download', p, '正在读取语音模型'));
     const out = new Uint8Array(man.size); let off = 0;
-    for (const part of man.parts) { const b = await cachedBytes(base + part.name, p => status('download', (off + p * part.size) / man.size, '正在下载语音模型')); out.set(b, off); off += b.length; }
+    for (const part of man.parts) { const b = await cachedBytes(base + part.name, p => status('download', (off + p * part.size) / man.size, '正在下载语音模型'), part.size); out.set(b, off); off += b.length; }
     if (off !== man.size) throw new Error('语音模型没有下载完整');
     return out;
   }

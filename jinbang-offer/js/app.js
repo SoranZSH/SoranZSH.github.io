@@ -105,7 +105,7 @@
   /* ---------- 语音 ---------- */
   const RING = 490, MAX = 60000; let tick = null;
   ASR.onStatus = ({ phase, progress, message }) => {
-    if (phase === 'download') { $('mic-s').textContent = '正在准备 ' + Math.round(progress * 100) + '%'; $('loadbar-i').style.width = (progress * 100) + '%'; $('mic-hint').textContent = LOCAL ? '正在读取本地语音模型（约 240 MB，只在本机运行，不上传）' : '正在下载语音模型（约 240 MB，只下载这一次；识别在你的浏览器里完成，录音不上传）'; }
+    if (phase === 'download') { $('mic-s').textContent = '正在准备 ' + Math.round(progress * 100) + '%'; $('loadbar-i').style.width = (progress * 100) + '%'; $('mic-hint').textContent = LOCAL ? '正在读取本地语音模型（约 240 MB，只在本机运行，不上传）' : '正在下载语音模型（约 160 MB，只下载这一次；识别在你的浏览器里完成，录音不上传）'; }
     else if (phase === 'init') { $('mic-s').textContent = '马上就好'; $('mic-hint').textContent = '正在启动识别引擎……'; }
     else if (phase === 'ready') { $('mic').disabled = false; $('mic-s').textContent = '点麦克风开始'; $('mic-hint').textContent = '最多说一分钟，说完再点一下。'; $('loadbar').classList.add('hide'); }
     else if (phase === 'error') { $('loadbar').classList.add('hide'); $('mic-s').textContent = '语音暂时用不了'; $('mic-hint').textContent = '语音模型没加载成功（' + message + '），已切到文字输入。'; setMode('text'); }
@@ -141,7 +141,7 @@
   if (LOCAL) { ASR.load().catch(() => {}); fetch('api/status').then(r => r.ok ? r.json() : {}).then(j => { st.llm = !!j.llm; }).catch(() => {}); }
   else {
     $('mic').disabled = false; $('loadbar').classList.add('hide'); $('mic-s').textContent = '点麦克风启用语音';
-    $('mic-hint').textContent = '第一次用语音要下载约 240 MB 的识别模型（之后会缓存在浏览器里），建议连着 Wi-Fi；不想下载可以切到文字输入。';
+    $('mic-hint').textContent = '第一次用语音要下载约 160 MB 的识别模型（之后会缓存在浏览器里），建议连着 Wi-Fi；不想下载可以切到文字输入。';
     if (/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent)) setMode('text');
   }
 
